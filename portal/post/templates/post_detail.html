@@ -1,0 +1,63 @@
+{% extends "base/_base.html" %}
+
+{% block title %}Detalhes{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8"> 
+
+
+        <div class="bg-light text-center p-3">  
+            <div class="d-flex justify-content-between">
+                <span>{{post.published_date}}</span> <br> 
+                <div class="div">
+                    {% if post.user == request.user %}
+                    <a class="btn btn-warning" href="{% url 'post-update' post.pk %}">Editar</a>  
+                    <a class="btn btn-danger" href="{% url 'post-delete' post.pk %}">Deletar</a>  
+                    {% endif %} 
+                </div> 
+            </div> 
+            <div class="text-start"> 
+                <span>Author: {{post.user.first_name}}</span>
+                <h2>{{post.title}}</h2>
+                <p>{{post.description}}</p>
+                <a href="{{post.create_file.url}}" target="_blank">Arquivo</a>   
+            </div> 
+        </div>
+        
+   
+        <div class="mt-5">  
+            {% if user.is_authenticated %} 
+            <form method="POST">
+                {% csrf_token %}
+                <textarea class="form-control" rows="3" name="comment" id="comment" placeholder="Escreva um comentário..."></textarea> 
+                <div class="text-end mt-2">
+                    <button type="submit" class="btn btn-outline-primary">Comentar</button>
+                </div>
+            </form> 
+            {% else %} 
+            <div class="text-center mb-3">
+                <h4>Olá,</h4>
+                <p>Você precisa fazer login no sistema para comentar.</p>
+                <a class="btn btn-dark" href="{% url 'login' %}">
+                    <i class="fas fa-sign-in-alt fa-2x"></i>
+                </a>
+            </div>  
+            {% endif %} 
+            
+            <h4>{{comments_count}} Comentários</h4>
+             
+            {% for comment in comments %}
+            {% if comment.is_parent %}   
+                {% include "comments/comment-edit.html" %}
+                {% include "comments/comment-reply.html" %} 
+            {% endif %}
+            {% endfor %} 
+
+        </div>  
+        
+    </div>
+</div>
+
+
+{% endblock %}

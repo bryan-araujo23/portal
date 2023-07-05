@@ -1,0 +1,14 @@
+{% extends "base/_base.html" %}
+
+{% block title %}Deletar Post{% endblock %}
+
+{% block content %}
+<div class="row align-items-center justify-content-center">
+    <form class="col-md-6 border shadow-sm p-3" method="POST" action="{% url 'post-delete' object.pk %}" autocomplete="off"
+        enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Deletar post</h2> 
+        <button type="submit" class="btn btn-danger" name="btn_adicionar">Deletar</button>
+    </form>
+</div>
+{% endblock %}

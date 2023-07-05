@@ -1,0 +1,55 @@
+{% load static %}
+<nav class="p-3 mb-3 border-bottom navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="/">Q&A</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'about' %}">Sobre</a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'howtouse' %}">Como Usar?</a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'faq' %}">FAQ</a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'contact' %}">Contato</a>
+                </li> 
+            </ul>
+            <button class="btn btn-outline-info mx-2" onclick="location.href='{% url 'post-create' %}'">+ CRIAR POST</button>
+            
+            <form class="d-flex" method="GET" action="{% url 'post-list' %}">
+                <input class="form-control me-2" type="search" name="title" value="{{request.GET.title}}" placeholder="Pesquisar" aria-label="Search">
+            </form>
+            
+            {% if user.is_authenticated %}
+            <div class="dropdown p-3">
+                <a href="#" class=" d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1"
+                    data-bs-toggle="dropdown" aria-expanded="false"> 
+                    <img src="{{user.profile.image.url}}" class="navbar-logo" alt="mdo"> 
+                </a>
+                <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="{% url 'user-profile' user.username %}">{{user.first_name}} {{user.last_name}}</a></li>
+                    <li><a class="dropdown-item" href="{% url 'user_change' user.id %}">Configurações</a></li> 
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
+                </ul>
+            </div>
+            {% else %}
+
+            <button class="btn btn-outline-warning mx-2" onclick="location.href='{% url 'login' %}'">Entrar</button>
+            <button class="btn btn-warning" onclick="location.href='{% url 'user_new' %}'">Registrar</button>
+
+            {% endif %}
+        </div>
+</nav>

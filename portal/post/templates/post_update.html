@@ -1,0 +1,15 @@
+{% extends "base/_base.html" %}
+
+{% block title %}Atualizar Post{% endblock %}
+
+{% block content %}
+<div class="row align-items-center justify-content-center">
+    <form class="col-md-6 border shadow-sm p-3" method="POST" action="{% url 'post-update' object.pk %}" autocomplete="off"
+        enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Atualizar post</h2>
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary" name="btn_adicionar">Criar</button>
+    </form>
+</div>
+{% endblock %}

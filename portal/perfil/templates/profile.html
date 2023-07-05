@@ -1,0 +1,73 @@
+{% extends "base/_base.html" %}
+
+{% block content %} 
+ 
+<div class="d-flex flex-wrap gap-5 justify-content-center align-items-center">
+
+        <div class="profile-logo">  
+            <img src="{{perfil.profile.image.url}}" class="logo" alt="">  
+        </div> 
+  
+        
+        <div class="profile-info">
+
+            <div class="d-flex justify-content-between">
+                <h2>{{perfil.first_name}} {{perfil.last_name}}</h2>
+                <a class="link-warning" href="{% url 'edit-profile' perfil.pk %}"><i class="fas fa-cog fa-2x"></i></a>
+            </div>
+            
+
+            
+            <span><strong>Data Criação:</strong> 12/12/2022</span>
+    
+            <p><strong>Ocupação:</strong> {{perfil.profile.occupation}}</p>
+            <p><strong>Descrição:</strong> {{perfil.profile.description}}</p>
+            
+    
+            <p><strong>Genero:</strong> {{perfil.profile.gender}}</p>
+    
+            <div class="d-flex gap-3"> 
+                <p><strong>Telefone:</strong> {{perfil.profile.phone}}</p>
+                <p><strong>Cidade:</strong> {{perfil.profile.city}}</p>
+                <p><strong>País:</strong> {{perfil.profile.country}}</p>   
+            </div>
+            
+        </div>
+ 
+</div>  
+ 
+<div class="row g-2 mt-5">
+    <div class="col-md-4 bg-light">
+        <form class="d-flex" role="search" method="GET" action="{% url 'user-profile' perfil.profile.user.username %}">
+            <input class="form-control me-2" type="search" name="title_post" value="{{request.GET.title_post}}" placeholder="Pesquisar..." aria-label="Search">
+            <button class="btn btn-outline-dark" type="submit">Pesquisar</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+
+        {% for el in get_posts %}  
+        <div class="p-3 mb-3 border border-dark border-3 rounded-3 shadow-sm">  
+            <div class="d-flex justify-content-between align-items-center">
+                <h5><a href="{% url 'post-detail' el.pk %}">{{el.title}}</a></h5> 
+                <div class="div">
+                    {% if el.user == request.user %}
+                    <a class="btn btn-warning" href="{% url 'post-update' el.pk %}">Editar</a>  
+                    <a class="btn btn-danger" href="{% url 'post-delete' el.pk %}">Deletar</a>  
+                    {% endif %}
+                </div> 
+            </div> 
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="align-items-center"> 
+                    <small class="text-muted">{{el.published_date}}</small><br>
+                    <small><i class="fa fa-comment"></i> {{el.comment_post.all.count}}</small>
+                </div> 
+            </div>
+        </div> 
+        {% endfor %}  
+
+    </div>
+</div>
+
+ 
+
+{% endblock %}

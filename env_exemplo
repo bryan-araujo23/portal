@@ -1,0 +1,18 @@
+SECRET_KEY=%psr5pu^ohs2nra35n@2wu2(3$(fjj6eitv0w-e)3+pyp9kwd1
+DEBUG=True
+SUPER_USER=ADMIN
+EMAIL= ''
+
+NAME_DB=db.sqlite3
+USER_DB=root
+PASSWORD_DB=
+HOST_DB=localhost
+PORT_DB=3306
+
+EMAIL_HOST = 'smtp-mail.outlook.com' 
+EMAIL_HOST_USER = '' 
+EMAIL_HOST_PASSWORD = '' 
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True 
+DEFAULT_FROM_EMAIL = ''
+SERVER_EMAIL = DEFAULT_FROM_EMAIL

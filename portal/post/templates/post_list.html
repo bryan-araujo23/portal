@@ -1,0 +1,52 @@
+{% extends "base/_base.html" %}
+
+{% block title %}Todos os posts{% endblock %} 
+
+{% block content %} 
+<div class="row"> 
+    <div class="col-md-8"> 
+        
+        {% for el in post_list %}  
+        <div class="p-3 mb-3 border border-dark border-3 rounded-3 shadow-sm"> 
+
+            <div class="align-items-center">
+                <div class="d-flex justify-content-between">
+                    <h5><a href="{% url 'post-detail' el.pk %}">{{el.title}}</a></h5>
+                    <small>{{el.user.first_name}} {{el.user.last_name}}</small> 
+                </div>  
+                <div class="text-truncate-box"> 
+                    <p class="text-truncate">{{el.description}}</p> 
+                </div>
+                
+            </div> 
+ 
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="align-items-center">
+
+                    <small class="text-muted">{{el.published_date}}</small>
+                    
+                </div>
+                
+                <span><i class="fa fa-comment"></i> {{el.comment_post.all.count}}</span>
+               
+            </div>
+        </div> 
+        {% endfor %} 
+        
+    </div> 
+</div> 
+
+{% include 'page.html' %}
+ 
+<style> 
+    .text-truncate-box p{
+        -webkit-line-clamp: 2;
+        display: -webkit-box!important;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        white-space: normal;
+    }
+</style>
+
+
+{% endblock %}
