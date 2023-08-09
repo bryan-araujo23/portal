@@ -2,9 +2,6 @@
 
 Mini Sistema Q&amp;A feito em Python/Django
 
-Seção 1 - Introdução
-Sobre
-
 Mini Sistema Q&A (forum) de perguntas e respostas simples feito com Python/Django
 
 
