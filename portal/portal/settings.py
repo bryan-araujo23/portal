@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
  
 CORS_ALLOW_HEADERS = list(default_headers) + [
     "X-Register",
@@ -158,8 +158,11 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/' 
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+
+
 
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
