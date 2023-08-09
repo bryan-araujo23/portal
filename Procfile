@@ -1,1 +1,1 @@
-web: gunicorn prtal.portal.wsgi --log-file -
+web: gunicorn portal.portal.wsgi --log-file -
